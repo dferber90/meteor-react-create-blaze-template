@@ -61,7 +61,7 @@ var renderInPlaceOfNode = function (reactElement, targetNode) {
 
 createBlazeTemplate = function (Component, optionalTemplateName) {
   "use strict";
-  var templateName = optionalTemplateName || Component.displayName();
+  var templateName = optionalTemplateName || Component.displayName;
   if (
     !Component ||
     typeof Template !== "function"
