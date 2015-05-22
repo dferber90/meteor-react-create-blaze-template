@@ -73,6 +73,19 @@ createBlazeTemplate(Bookface, 'Bookface');
 ```
 
 
+# Shorthand
+Every React component is automatically assigned a [displayName](https://facebook.github.io/react/docs/component-specs.html#displayname).
+This name will be used as the template name when omitting the second parameter
+to `createBlazeTemplate`.
+
+Imagine the React component `Bookface` from the previous example.
+Its displayName is `Bookface`. We can omit the template name as you see below.
+```js
+createBlazeComponent(Bookface);
+````
+Now we can stil render it with `{{> Bookface}}`.
+
+
 # Attention
 
 `componentWillUnmount` will only be called in case the React component

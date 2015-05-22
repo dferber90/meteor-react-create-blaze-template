@@ -59,8 +59,9 @@ var renderInPlaceOfNode = function (reactElement, targetNode) {
   return container;
 };
 
-createBlazeTemplate = function (Component, templateName) {
+createBlazeTemplate = function (Component, optionalTemplateName) {
   "use strict";
+  var templateName = optionalTemplateName || Component.displayName();
   if (
     !Component ||
     typeof Template !== "function"
