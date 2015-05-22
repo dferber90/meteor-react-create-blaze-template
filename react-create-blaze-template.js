@@ -11,39 +11,19 @@
   {{> ReactComponentName}}
 */
 
-createBlazeTemplate = function (Component, templateName) {
-  if (typeof Template === "function" &&
-      typeof templateName === "string") {
-    var template = new Template(
-      templateName,
-      function() {
-        // A placeholder HTML element that will serve as the mounting
-        // point for the React component. May have siblings!
-        return new HTML.SPAN;
-      }
-    );
+/* global
+  createBlazeTemplate: true
+  Template: false
+  HTML: false
+  React: false
+*/
+/*eslint no-unused-vars: 0*/
 
-    // unmount component when template is destroyed, based on
-    // https://github.com/hmeerlo/react-meteor/commit/2670246b04649e2c63c443b13f9c47cb93aee4bf
-    template.onRendered(function() {
-      this.container = renderInPlaceOfNode(
-        // Equivalent to <Component {...this.data} />:
-        React.createElement(Component, this.data || {}),
-        this.find("span")
-      );
-    });
-
-    template.onDestroyed(function () {
-      React.unmountComponentAtNode(this.container);
-    });
-
-    Template[templateName] = template;
-  }
-};
 
 // Like React.render, but it replaces targetNode, and works even if
 // targetNode.parentNode has children other than targetNode.
-function renderInPlaceOfNode(reactElement, targetNode) {
+var renderInPlaceOfNode = function (reactElement, targetNode) {
+  "use strict";
   var container = targetNode.parentNode;
   var prevSibs = [];
   var nextSibs = [];
@@ -61,7 +41,7 @@ function renderInPlaceOfNode(reactElement, targetNode) {
     child = next;
   }
 
-  var result = React.render(reactElement, container);
+  React.render(reactElement, container);
   var rendered = container.firstChild;
 
   if (prevSibs.length > 0) {
@@ -77,4 +57,38 @@ function renderInPlaceOfNode(reactElement, targetNode) {
   }
 
   return container;
-}
+};
+
+createBlazeTemplate = function (Component, templateName) {
+  "use strict";
+  if (
+    !Component ||
+    typeof Template !== "function"
+    || typeof templateName !== "string"
+  ) { return; }
+
+  var template = new Template(
+    templateName,
+    function() {
+      // A placeholder HTML element that will serve as the mounting
+      // point for the React component. May have siblings!
+      return new HTML.SPAN();
+    }
+  );
+
+  // unmount component when template is destroyed, based on
+  // https://github.com/hmeerlo/react-meteor/commit/2670246b04649e2c63c443b13f9c47cb93aee4bf
+  template.onRendered(function() {
+    this.container = renderInPlaceOfNode(
+      // Equivalent to <Component {...this.data} />:
+      React.createElement(Component, this.data || {}),
+      this.find("span")
+    );
+  });
+
+  template.onDestroyed(function () {
+    React.unmountComponentAtNode(this.container);
+  });
+
+  Template[templateName] = template;
+};
