@@ -67,6 +67,32 @@ createBlazeTemplate(Bookface, 'Bookface');
 <template name="layout">
 	<div>
 		{{> Bookface}}
+	</div>
+	<p>Some text...</p>
+</template>
+```
+
+
+# Attention
+
+`componentWillUnmount` will only be called in case the React component
+has no siblings in the Blaze template.
+
+## componentWillUnmount will be called:
+```html
+<template name="layout">
+	<div>
+		{{> Bookface}}
+	</div>
+	<p>Some text...</p>
+</template>
+```
+
+## componentWillUnmount will NOT be called:
+```html
+<template name="layout">
+	<div>
+		{{> Bookface}}
 		<p>Some text...</p>
 	</div>
 </template>

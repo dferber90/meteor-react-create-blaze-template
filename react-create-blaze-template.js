@@ -2,6 +2,9 @@
   This whole file is based on
   https://github.com/reactjs/react-meteor/blob/master/src/ReactMeteor.js
 
+  Also includes unmounting, based on
+  https://github.com/hmeerlo/react-meteor/commit/2670246b04649e2c63c443b13f9c47cb93aee4bf
+
   First, specify a name for your component, e.g.
   createBlazeTemplate(ReactCompnoent, 'ReactComponentName');
   Now, you can include React Components into Blaze Templates with
@@ -20,12 +23,18 @@ createBlazeTemplate = function (Component, templateName) {
       }
     );
 
+    // unmount component when template is destroyed, based on
+    // https://github.com/hmeerlo/react-meteor/commit/2670246b04649e2c63c443b13f9c47cb93aee4bf
     template.onRendered(function() {
-      renderInPlaceOfNode(
-        // Equivalent to <Cls {...this.data} />:
+      this.container = renderInPlaceOfNode(
+        // Equivalent to <Component {...this.data} />:
         React.createElement(Component, this.data || {}),
         this.find("span")
       );
+    });
+
+    template.onDestroyed(function () {
+      React.unmountComponentAtNode(this.container);
     });
 
     Template[templateName] = template;
@@ -67,5 +76,5 @@ function renderInPlaceOfNode(reactElement, targetNode) {
     });
   }
 
-  return result;
+  return container;
 }
