@@ -25,7 +25,7 @@ The feature can now be used with any React component.
 
 # Installation
 ```
-$ meteor add dferber90:react-create-blaze-template
+$ meteor add dferber:react-create-blaze-template
 ```
 
 # Usage
