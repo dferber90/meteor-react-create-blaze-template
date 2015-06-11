@@ -3,7 +3,7 @@ This atmosphere package enables you to include React components into Blaze
 templates.
 
 # MDG official integration announcement
-*This package has been available for some time. In the meantime the Meteor
+This package has been available for some time. In the meantime the Meteor
 Development Group has started to work on official packages for React
 support. I recommend switching to their packages once they are released.
 They are available here [github.com/meteor/react-packages](https://github.com/meteor/react-packages).
@@ -12,7 +12,6 @@ However, you can still use this package until these are released.
 This package will marked as deprecated once MDG's solution is ready.
 
 This package also has an [issue](https://github.com/dferber90/meteor-react-create-blaze-template/issues/1) in case the parent blaze template's data changes.
-Enjoy with caution :)*
 
 ---
 
