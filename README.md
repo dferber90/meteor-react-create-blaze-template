@@ -2,12 +2,27 @@
 This atmosphere package enables you to include React components into Blaze
 templates.
 
+# MDG official integration announcement
+*This package has been available for some time. In the meantime the Meteor
+Development Group has started to work on official packages for React
+support. I recommend switching to their packages once they are released.
+They are available here [github.com/meteor/react-packages](https://github.com/meteor/react-packages).
+
+However, you can still use this package until these are released.
+This package will marked as deprecated once MDG's solution is ready.
+
+This package also has an [issue](https://github.com/dferber90/meteor-react-create-blaze-template/issues/1) in case the parent blaze template's data changes.
+Enjoy with caution :)*
+
+---
+
+
 # About
 There are two packages which enable you to use React with Meteor.
 One of them is `reactjs:react`, the other one is `grove:react`.
 
 `reactjs:react` uses Reacts compiler to transform your jsx-files.
-Unfortunately this will not transpile them for backwards compability.
+Unfortunately this will not transpile them for backwards compatibility.
 However, it offers the nice feature to include React components directly in
 Blaze templates.
 

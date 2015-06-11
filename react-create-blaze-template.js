@@ -80,11 +80,24 @@ createBlazeTemplate = function (Component, optionalTemplateName) {
   // unmount component when template is destroyed, based on
   // https://github.com/hmeerlo/react-meteor/commit/2670246b04649e2c63c443b13f9c47cb93aee4bf
   template.onRendered(function() {
-    this.container = renderInPlaceOfNode(
+    var self = this;
+
+    self.container = renderInPlaceOfNode(
       // Equivalent to <Component {...this.data} />:
       React.createElement(Component, this.data || {}),
       this.find("span")
     );
+/*
+    self.autorun(function() {
+      React.render(
+        React.createElement(
+          Component,
+          Template.currentData() || {}
+        ),
+        self.container
+      );
+    });
+*/
   });
 
   template.onDestroyed(function () {

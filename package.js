@@ -1,7 +1,7 @@
 /* global Package: false */
 Package.describe({
   name: "dferber:react-create-blaze-template",
-  version: "0.2.1",
+  version: "0.2.2",
   summary: "Use React components in Blaze templates",
   git: "https://github.com/dferber90/meteor-react-create-blaze-template",
   documentation: "README.md"
